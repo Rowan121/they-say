@@ -1,0 +1,10 @@
+{
+  "generated_from": "Neo4j Aura instance 04bf4cb1 (GraphRAG document-intelligence ingestion)",
+  "counts": {
+    "documents": 80,
+    "claims": 840,
+    "chunks": 25,
+    "source_pdfs": 3
+  },
+  "note": "Vector embeddings on chunks are intentionally excluded (regenerable, large). Rebuild with import_backend.py."
+}
