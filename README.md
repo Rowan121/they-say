@@ -1,5 +1,7 @@
 # Ground Truthing
 
+**Live demo:** <https://rowan121.github.io/ground-truthing/>
+
 Tracing how a single mis-read paper fans out into "common knowledge." The
 case study is the hummingbird **1 : 4 sugar rule** (~20% sugar water): a
 recommendation that became gospel across blogs, guides, and retailers even
