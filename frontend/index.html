@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ground Truthing · How the Hummingbird "1:4 Rule" Mutated</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<style>
+  :root{
+    --bg0:#0a0e17; --bg1:#0f1626; --panel:rgba(20,28,44,.72); --panel-brd:rgba(120,150,200,.16);
+    --ink:#e8eefc; --ink-dim:#9fb0cf; --ink-faint:#6b7b9c;
+    --claim:#ff6b5e; --claim2:#ff9d5c; --pivotal:#c084fc; --evidence:#34d0b4; --truth:#ffd166;
+    --lo:#ef4444; --mid:#f59e0b; --hi:#22c55e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:
+     radial-gradient(1200px 700px at 78% -8%, #16223b 0%, rgba(22,34,59,0) 60%),
+     radial-gradient(900px 600px at 8% 108%, #16283b 0%, rgba(22,40,59,0) 55%),
+     linear-gradient(180deg,var(--bg0),var(--bg1));color:var(--ink);overflow:hidden}
+  #app{display:grid;grid-template-columns:340px 1fr;height:100vh}
+
+  /* ---- left rail ---- */
+  aside{border-right:1px solid var(--panel-brd);backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(14,20,34,.85),rgba(10,14,23,.7));
+        display:flex;flex-direction:column;min-height:0}
+  .brand{padding:20px 22px 14px}
+  .brand h1{font-size:18px;margin:0 0 4px;letter-spacing:.2px}
+  .brand h1 span{background:linear-gradient(90deg,var(--claim),var(--truth));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .brand p{margin:0;font-size:12.5px;line-height:1.5;color:var(--ink-dim)}
+  .rail-scroll{overflow:auto;padding:6px 14px 20px;min-height:0}
+  .section-t{font-size:10.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--ink-faint);margin:16px 8px 8px}
+
+  .legend{display:flex;flex-direction:column;gap:7px;padding:0 8px}
+  .lg{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink-dim)}
+  .dot{width:12px;height:12px;border-radius:4px;flex:none;box-shadow:0 0 10px rgba(0,0,0,.4)}
+  .grad{height:10px;border-radius:6px;margin:4px 8px 3px;background:linear-gradient(90deg,var(--lo),var(--mid),var(--hi))}
+  .grad-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--ink-faint);padding:0 8px}
+
+  .paper{border:1px solid var(--panel-brd);background:rgba(255,255,255,.02);border-radius:12px;padding:9px 11px;margin:7px 6px;cursor:pointer;transition:.15s}
+  .paper:hover{background:rgba(255,255,255,.06);transform:translateX(2px)}
+  .paper.active{border-color:rgba(192,132,252,.7);background:rgba(192,132,252,.10)}
+  .paper .pt{font-size:12.5px;font-weight:600;line-height:1.3}
+  .paper .pm{font-size:11px;color:var(--ink-faint);margin-top:3px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .chip{font-size:9.5px;padding:1.5px 7px;border-radius:20px;font-weight:700;letter-spacing:.3px}
+  .verif{color:#0a0e17;background:var(--truth)}
+  .ratio{border:1px solid var(--panel-brd);color:var(--ink-dim);border-radius:20px;padding:1px 7px;font-size:10px}
+
+  /* ---- stage ---- */
+  main{position:relative;min-width:0}
+  .stage-head{position:absolute;top:16px;left:22px;right:22px;z-index:5;pointer-events:none;display:flex;justify-content:space-between;gap:20px}
+  .stage-head .lbl{font-size:11px;color:var(--ink-faint);letter-spacing:1.5px;text-transform:uppercase}
+  .flow{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--ink-dim);background:var(--panel);border:1px solid var(--panel-brd);
+        padding:7px 12px;border-radius:30px;pointer-events:auto;backdrop-filter:blur(8px)}
+  .flow b{color:var(--ink)}
+  svg{width:100%;height:100%;display:block;cursor:grab}
+  svg:active{cursor:grabbing}
+  .link{fill:none;stroke-linecap:round}
+  .node{cursor:pointer}
+  .node rect{stroke:rgba(255,255,255,.14);transition:.15s}
+  .node text{pointer-events:none;font-weight:600}
+  .node .t1{font-size:12px;fill:var(--ink)}
+  .node .t2{font-size:9.5px;fill:rgba(232,238,252,.62);font-weight:500}
+  .node.dim{opacity:.16}
+  .link.dim{opacity:.05}
+  .node.focus rect{stroke:#fff;stroke-width:2}
+  .halo{filter:blur(9px);opacity:.55}
+
+  /* detail */
+  #detail{position:absolute;right:18px;top:70px;width:310px;background:var(--panel);border:1px solid var(--panel-brd);border-radius:16px;
+          padding:16px 17px;backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateX(20px);opacity:0;
+          pointer-events:none;transition:.2s;z-index:6}
+  #detail.show{transform:none;opacity:1;pointer-events:auto}
+  #detail .dclose{position:absolute;top:10px;right:12px;color:var(--ink-faint);cursor:pointer;font-size:16px;border:none;background:none}
+  #detail .dstance{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+  #detail h3{margin:0 0 6px;font-size:14.5px;line-height:1.35}
+  #detail .dmeta{font-size:11.5px;color:var(--ink-faint);margin-bottom:10px}
+  #detail .dclaim{font-size:12.5px;line-height:1.5;color:var(--ink-dim);border-left:2px solid var(--panel-brd);padding-left:10px;margin:10px 0}
+  #detail .dnote{font-size:11px;color:var(--ink-faint);font-style:italic;margin-bottom:12px}
+  #detail a{display:inline-block;font-size:11.5px;color:#7cc4ff;text-decoration:none;word-break:break-all}
+  #detail a:hover{text-decoration:underline}
+  #detail .drow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .foot{font-size:10px;color:var(--ink-faint);padding:10px 16px;border-top:1px solid var(--panel-brd)}
+  .foot b{color:var(--ink-dim)}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside>
+    <div class="brand">
+      <h1>Ground <span>Truthing</span></h1>
+      <p>Tracing how a single mis-read paper fans out into "common knowledge" — the hummingbird <b>1&nbsp;:&nbsp;4 sugar rule</b>. Edge <b>thickness</b> = citation strength · <b>color</b> = confidence the citation is faithful.</p>
+    </div>
+    <div class="rail-scroll">
+      <div class="section-t">Confidence in each link</div>
+      <div class="grad"></div>
+      <div class="grad-lbl"><span>mutated / low</span><span>faithful / high</span></div>
+
+      <div class="section-t">Node types</div>
+      <div class="legend">
+        <div class="lg"><span class="dot" style="background:var(--claim)"></span> Popularized claim ("1:4 gospel")</div>
+        <div class="lg"><span class="dot" style="background:var(--pivotal)"></span> Pivotal paper — misread anchor</div>
+        <div class="lg"><span class="dot" style="background:var(--evidence)"></span> Overlooked evidence</div>
+        <div class="lg"><span class="dot" style="background:var(--truth)"></span> Isolated counter-truth (~50%)</div>
+      </div>
+
+      <div class="section-t">Corpus · common body of knowledge</div>
+      <div id="paperList"></div>
+    </div>
+    <div class="foot">Data live from <b>Neo4j Aura · 04bf4cb1</b> → <b>graph.json</b>. 20 documents · 23 citations.</div>
+  </aside>
+
+  <main>
+    <div class="stage-head">
+      <div class="lbl">Mutation &nbsp;⟵&nbsp; propagation &nbsp;⟶&nbsp; the anchor &nbsp;⟶&nbsp; overlooked evidence &nbsp;⟶&nbsp; isolated truth</div>
+      <div class="flow"><span>Click any paper · drag to explore</span></div>
+    </div>
+    <svg id="svg"></svg>
+    <div id="detail">
+      <button class="dclose" onclick="hideDetail()">✕</button>
+      <div class="dstance" id="d_stance"></div>
+      <h3 id="d_title"></h3>
+      <div class="dmeta" id="d_meta"></div>
+      <div class="drow" id="d_row"></div>
+      <div class="dclaim" id="d_claim"></div>
+      <div class="dnote" id="d_note"></div>
+      <a id="d_link" target="_blank" rel="noopener"></a>
+    </div>
+  </main>
+</div>
+
+<script>
+const STANCE = {
+  mutated_claim:{c:'#ff6b5e', name:'Popularized claim'},
+  pivotal:{c:'#c084fc', name:'Pivotal · misread anchor'},
+  evidence:{c:'#34d0b4', name:'Overlooked evidence'},
+  isolated_truth:{c:'#ffd166', name:'Isolated counter-truth'}
+};
+// x target by layer (fraction of width); fan converges on the anchor (layer 4)
+const COLX = {1:0.11, 2:0.26, 3:0.40, 4:0.55, 5:0.74, 6:0.92};
+const conf2color = d3.scaleLinear().domain([0,0.5,1]).range(['#ef4444','#f59e0b','#22c55e']).interpolate(d3.interpolateRgb);
+
+let nodes, edges, sim, node, link, linkHalo;
+const svg = d3.select('#svg');
+let W = 0, H = 0;
+
+function shortLabel(n){
+  let a = n.authors.replace(/ \(.*\)/,'').split('&')[0].split(',')[0].trim();
+  if(a.length>22) a = a.slice(0,21)+'…';
+  return a;
+}
+
+d3.json('graph.json').then(data=>{
+  nodes = data.nodes.map(d=>Object.assign({},d));
+  const byId = new Map(nodes.map(n=>[n.id,n]));
+  edges = data.edges.map(e=>Object.assign({}, e, {source:e.source, target:e.target}));
+  buildRail();
+  layout();
+  window.addEventListener('resize', ()=>{layout(true);});
+});
+
+function layout(resizeOnly){
+  const rect = svg.node().getBoundingClientRect();
+  W = rect.width > 0 ? rect.width : 1280;
+  H = rect.height > 0 ? rect.height : 800;
+  // vertical target per node: spread evenly within its layer column
+  const groups = d3.group(nodes, d=>d.layer);
+  groups.forEach(arr=>{
+    arr.sort((a,b)=>a.year-b.year);
+    const n = arr.length;
+    arr.forEach((d,i)=>{
+      d._tx = COLX[d.layer]*W;
+      d._ty = n===1 ? H*0.46 : (H*0.16 + (H*0.68)*(i/(n-1)));
+    });
+  });
+
+  if(resizeOnly && sim){ sim.force('x', d3.forceX(d=>d._tx).strength(.5)).force('y', d3.forceY(d=>d._ty).strength(.28)); sim.alpha(.5).restart(); return; }
+
+  svg.selectAll('*').remove();
+  const defs = svg.append('defs');
+  // glow filter
+  const f = defs.append('filter').attr('id','glow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
+  f.append('feGaussianBlur').attr('stdDeviation','5').attr('result','b');
+  const fm=f.append('feMerge'); fm.append('feMergeNode').attr('in','b'); fm.append('feMergeNode').attr('in','SourceGraphic');
+  // arrow markers at a few confidence buckets
+  [['lo','#ef4444'],['mid','#f59e0b'],['hi','#22c55e']].forEach(([id,col])=>{
+    defs.append('marker').attr('id','arr-'+id).attr('viewBox','0 -5 10 10').attr('refX',9).attr('refY',0)
+      .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
+      .append('path').attr('d','M0,-4L9,0L0,4').attr('fill',col).attr('opacity',.9);
+  });
+
+  const root = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([.4,2.5]).on('zoom',ev=>root.attr('transform',ev.transform)));
+
+  linkHalo = root.append('g').selectAll('path').data(edges).join('path')
+    .attr('class','link halo')
+    .attr('stroke',e=>conf2color(e.confidence))
+    .attr('stroke-width',e=>2+e.strength*9);
+
+  link = root.append('g').selectAll('path').data(edges).join('path')
+    .attr('class','link')
+    .attr('stroke',e=>conf2color(e.confidence))
+    .attr('stroke-width',e=>1+e.strength*5.5)
+    .attr('stroke-dasharray',e=>e.kind==='mutated'?'2 6':null)
+    .attr('opacity',.85)
+    .attr('marker-end',e=>'url(#arr-'+(e.confidence<0.5?'lo':e.confidence<0.72?'mid':'hi')+')');
+
+  node = root.append('g').selectAll('g').data(nodes).join('g')
+    .attr('class','node').call(drag());
+
+  node.each(function(d){
+    const g=d3.select(this);
+    const lab=shortLabel(d);
+    const w=Math.max(112, lab.length*7.6+30);
+    d._w=w; d._h=46;
+    const iso = d.stance==='isolated_truth';
+    if(iso||d.stance==='pivotal'){
+      g.append('rect').attr('class','glowrect').attr('x',-w/2-3).attr('y',-26).attr('width',w+6).attr('height',52)
+       .attr('rx',16).attr('fill',STANCE[d.stance].c).attr('class','halo').style('filter','url(#glow)').attr('opacity',iso?.5:.32);
+    }
+    g.append('rect').attr('x',-w/2).attr('y',-23).attr('width',w).attr('height',46).attr('rx',14)
+     .attr('fill','rgba(16,22,38,.94)').attr('stroke',STANCE[d.stance].c).attr('stroke-width',iso?2.2:1.4);
+    g.append('rect').attr('x',-w/2).attr('y',-23).attr('width',5).attr('height',46).attr('rx',2).attr('fill',STANCE[d.stance].c);
+    g.append('text').attr('class','t1').attr('x',-w/2+13).attr('y',-3).text(lab);
+    g.append('text').attr('class','t2').attr('x',-w/2+13).attr('y',12).text(d.year+' · '+d.ratio + (d.verified?'  ✓':''));
+  });
+
+  node.on('click',(ev,d)=>{ev.stopPropagation();focusNode(d);showDetail(d);})
+      .on('mouseenter',(ev,d)=>hover(d))
+      .on('mouseleave',clearHover);
+  svg.on('click',()=>{clearFocus();hideDetail();});
+
+  sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(edges).id(d=>d.id).distance(e=>90+(1-e.strength)*70).strength(e=>0.15+e.strength*0.25))
+    .force('charge', d3.forceManyBody().strength(-340))
+    .force('collide', d3.forceCollide(d=>d._w/2+14))
+    .force('x', d3.forceX(d=>d._tx).strength(.55))
+    .force('y', d3.forceY(d=>d._ty).strength(.3))
+    .on('tick',tick);
+  // keep isolated truth truly apart
+  sim.force('charge').strength(d=>d.stance==='isolated_truth'?-720:-340);
+  // pin the isolated counter-truth so it reads as a standalone endpoint
+  nodes.filter(d=>d.stance==='isolated_truth').forEach(d=>{d.fx=d._tx; d.fy=d._ty;});
+  // settle synchronously (rAF is throttled when the tab is hidden), then paint
+  sim.stop();
+  for(let i=0;i<320;i++) sim.tick();
+  tick();
+}
+
+function tick(){
+  nodes.forEach(d=>{
+    const px=(d._w?d._w/2:30)+8, py=30;
+    if(d.fx==null){ d.x=Math.max(px, Math.min(W-px, d.x)); }
+    if(d.fy==null){ d.y=Math.max(py, Math.min(H-py, d.y)); }
+  });
+  link.attr('d',arc); linkHalo.attr('d',arc);
+  node.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function arc(e){
+  const s=e.source,t=e.target;
+  let dx=t.x-s.x, dy=t.y-s.y; const dist=Math.hypot(dx,dy)||1;
+  // trim to node edges (approx rounded-rect radius)
+  const sr=(s._w?s._w/2:30)-6, tr=(t._w?t._w/2:30)+8;
+  const sx=s.x+dx/dist*Math.min(sr,dist*0.4), sy=s.y+dy/dist*Math.min(28,dist*0.4);
+  const tx=t.x-dx/dist*Math.min(tr,dist*0.4), ty=t.y-dy/dist*Math.min(30,dist*0.4);
+  const dr=Math.hypot(tx-sx,ty-sy)*1.7;
+  return `M${sx},${sy}A${dr},${dr} 0 0,1 ${tx},${ty}`;
+}
+
+/* ---- interactions ---- */
+function neighbors(d){
+  const set=new Set([d.id]);
+  edges.forEach(e=>{const s=e.source.id||e.source,t=e.target.id||e.target; if(s===d.id)set.add(t); if(t===d.id)set.add(s);});
+  return set;
+}
+function hover(d){
+  const set=neighbors(d);
+  node.classed('dim',n=>!set.has(n.id));
+  link.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
+  linkHalo.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
+}
+function clearHover(){ if(document.querySelector('.node.focus'))return; node.classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);}
+let focused=null;
+function focusNode(d){
+  focused=d.id;
+  node.classed('focus',n=>n.id===d.id);
+  const set=neighbors(d);
+  node.classed('dim',n=>!set.has(n.id));
+  link.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
+  linkHalo.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
+  d3.selectAll('.paper').classed('active',p=>p.__id===d.id);
+}
+function clearFocus(){focused=null;node.classed('focus',false).classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);d3.selectAll('.paper').classed('active',false);}
+
+function drag(){
+  return d3.drag()
+    .on('start',(ev,d)=>{if(!ev.active)sim.alphaTarget(.25).restart();d.fx=d.x;d.fy=d.y;})
+    .on('drag',(ev,d)=>{d.fx=ev.x;d.fy=ev.y;})
+    .on('end',(ev,d)=>{if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;});
+}
+
+/* ---- detail panel ---- */
+function showDetail(d){
+  const s=STANCE[d.stance];
+  document.getElementById('d_stance').textContent=s.name; document.getElementById('d_stance').style.color=s.c;
+  document.getElementById('d_title').textContent=d.title;
+  document.getElementById('d_meta').textContent=d.authors+' · '+d.year;
+  const row=document.getElementById('d_row'); row.innerHTML='';
+  const rr=document.createElement('span');rr.className='ratio';rr.textContent='ratio: '+d.ratio;row.appendChild(rr);
+  if(d.verified){const v=document.createElement('span');v.className='chip verif';v.textContent='VERIFIED PAPER';row.appendChild(v);}
+  document.getElementById('d_claim').textContent=d.claim;
+  document.getElementById('d_note').textContent=d.note||'';
+  const a=document.getElementById('d_link');a.href=d.url;a.textContent=d.url;
+  document.getElementById('detail').classList.add('show');
+}
+function hideDetail(){document.getElementById('detail').classList.remove('show');clearFocus();}
+
+/* ---- left rail ---- */
+function buildRail(){
+  const list=document.getElementById('paperList');
+  const order={mutated_claim:0,pivotal:1,evidence:2,isolated_truth:3};
+  const sorted=[...nodes].sort((a,b)=>(order[a.stance]-order[b.stance])||a.layer-b.layer);
+  sorted.forEach(d=>{
+    const el=document.createElement('div');el.className='paper';el.__id=d.id;
+    el.innerHTML=`<div class="pt" style="border-left:3px solid ${STANCE[d.stance].c};padding-left:8px">${d.title}</div>
+      <div class="pm" style="padding-left:11px">${d.authors}, ${d.year}
+      <span class="ratio">${d.ratio}</span>${d.verified?'<span class="chip verif">VERIFIED</span>':''}</div>`;
+    el.addEventListener('click',()=>{const n=nodes.find(x=>x.id===d.id);focusNode(n);showDetail(n);
+      if(n.x){/* nudge view center could go here */}});
+    list.appendChild(el);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Credentials / secrets — never commit
+.env
+*.env
+secrets.json
+credentials.json
+*-credentials*
+mcp-router.json
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python scratch
+__pycache__/
+*.pyc
