@@ -1,6 +1,6 @@
 # Ground Truthing
 
-**Live demo:** <https://rowan121.github.io/ground-truthing/>
+**Live demo:** <https://rowan121.github.io/they-say/>
 
 Tracing how a single mis-read paper fans out into "common knowledge." The
 case study is the hummingbird **1 : 4 sugar rule** (~20% sugar water): a
