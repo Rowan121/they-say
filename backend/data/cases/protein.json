@@ -1,0 +1,265 @@
+{
+  "case_id": "protein",
+  "nodes": [
+    {
+      "id": "protein_today_per_meal",
+      "title": "How Much Protein Per Meal (TODAY.com)",
+      "authors": "TODAY.com (NBC News health)",
+      "year": 2025,
+      "type": "popular",
+      "layer": 1,
+      "url": "https://www.today.com/health/diet-fitness/protein-grams-per-meal-rcna197039",
+      "stance": "mutated_claim",
+      "claim": "Dietitians tell readers to eat 20-30 g protein per meal (20-40 g if goals are higher), saying the body 'can only absorb and use a certain amount of protein at a time,' the cap is 'up for debate... some research saying 30 grams and other studies saying 40 grams,' and there is 'no reason to eat more than 40 grams at once.'",
+      "ratio": "30-40 g",
+      "verified": true,
+      "note": "Most viral mainstream restatement: turns an MPS plateau into a digestive absorb-and-excrete ceiling."
+    },
+    {
+      "id": "protein_mens_health_3hours",
+      "title": "Eat to Build Muscle: Every 3 Hours, 30 g",
+      "authors": "Men's Health",
+      "year": 2020,
+      "type": "popular",
+      "layer": 2,
+      "url": "https://www.menshealth.com/nutrition/a33415760/eat-to-build-muscle/",
+      "stance": "mutated_claim",
+      "claim": "Recommends eating every ~3 hours across six meals a day and to 'shoot for about 30 grams of protein per meal' to support muscle growth.",
+      "ratio": "30 g / 3 h",
+      "verified": true,
+      "note": "Canonical gym-lore pairing: the 3-hour meal cadence plus a 30 g per-meal cap."
+    },
+    {
+      "id": "protein_reddit_scientificnutrition",
+      "title": "r/ScientificNutrition: Only 20-30 g Absorbed?",
+      "authors": "r/ScientificNutrition (Reddit thread)",
+      "year": 2023,
+      "type": "popular",
+      "layer": 2,
+      "url": "https://www.reddit.com/r/ScientificNutrition/comments/106x4dy/if_a_person_can_only_absorb_20_or_30_grams_of/",
+      "stance": "mutated_claim",
+      "claim": "Thread opens with the premise 'If a person can only absorb 20 or 30 grams of protein a time' and asks how bulk eating is even possible - the ceiling repeated as settled fact before debate begins.",
+      "ratio": "20-30 g",
+      "verified": true,
+      "note": "The myth as crowdsourced common sense; thread title is itself the mutated claim."
+    },
+    {
+      "id": "protein_unitypoint_daily",
+      "title": "How Much Protein Do You Need Daily? (UnityPoint)",
+      "authors": "UnityPoint Health (health system blog)",
+      "year": 2024,
+      "type": "authority",
+      "layer": 3,
+      "url": "https://www.unitypoint.org/news-and-articles/how-much-protein-do-you-need-daily-ideal-protein-intake-for-muscle-growth-weight-loss-and-managing-chronic-conditions",
+      "stance": "mutated_claim",
+      "claim": "A dietitian advises metabolizing protein '15-30 grams at a time' because 'studies show a higher intake of protein, like more than 40 grams in one sitting, isn't more beneficial.'",
+      "ratio": "15-30 g",
+      "verified": true,
+      "note": "Institutional health authority laundering the ceiling into clinical-sounding guidance."
+    },
+    {
+      "id": "protein_moore_2009",
+      "title": "Protein Dose Response of MPS After Resistance Exercise",
+      "authors": "Moore DR et al. (Am J Clin Nutr)",
+      "year": 2009,
+      "type": "paper",
+      "layer": 4,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19056590/",
+      "stance": "pivotal",
+      "claim": "In 6 young men after leg-only resistance exercise, 20 g whole-egg protein maximally stimulated muscle protein synthesis; 40 g produced no statistically significant further rise (a small ~10-20% bump) but did increase leucine oxidation.",
+      "ratio": "20 g",
+      "verified": true,
+      "note": "The misread anchor: a leg-exercise MPS plateau in 6 subjects that nobody citing a '30-40 g digestive ceiling' represents faithfully."
+    },
+    {
+      "id": "protein_schoenfeld_aragon_2018",
+      "title": "How Much Protein Can the Body Use in a Single Meal?",
+      "authors": "Schoenfeld BJ & Aragon AA (J Int Soc Sports Nutr)",
+      "year": 2018,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://link.springer.com/article/10.1186/s12970-018-0215-1",
+      "stance": "evidence",
+      "claim": "Recommends 0.4 g/kg/meal across at least 4 meals (>=1.6 g/kg/day) and argues higher per-meal doses are not all oxidized - explicitly rejecting a hard single-meal utilization ceiling.",
+      "ratio": "0.4 g/kg/meal",
+      "verified": true,
+      "note": "The corrective review that keeps the per-meal framing but demolishes the absolute cap."
+    },
+    {
+      "id": "protein_macnaughton_2016",
+      "title": "40 g vs 20 g Whey After Whole-Body Exercise",
+      "authors": "Macnaughton LS et al. (Physiol Rep)",
+      "year": 2016,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27511985/",
+      "stance": "evidence",
+      "claim": "In 30 resistance-trained men after whole-body resistance exercise, 40 g whey stimulated greater muscle protein synthesis than 20 g (0.059 vs 0.049 %/h, P=0.005).",
+      "ratio": "40 g > 20 g",
+      "verified": true,
+      "note": "Direct counter-evidence: doubles the 'max useful dose' once whole-body training is used."
+    },
+    {
+      "id": "protein_symons_2009",
+      "title": "30 g vs 90 g Lean Beef and MPS",
+      "authors": "Symons TB et al. (J Am Diet Assoc)",
+      "year": 2009,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19699838/",
+      "stance": "evidence",
+      "claim": "A 113 g beef serving (30 g protein) raised muscle protein synthesis ~50% in young and elderly adults; a 340 g serving (90 g protein) produced no further increase over 5 h.",
+      "ratio": "30 g vs 90 g",
+      "verified": true,
+      "note": "The honest nuance the myth omits: a real plateau over 5 h, but for MPS - not an absorption ceiling."
+    },
+    {
+      "id": "protein_issn_position_2017",
+      "title": "ISSN Position Stand: Protein and Exercise",
+      "authors": "Jäger R et al. (J Int Soc Sports Nutr)",
+      "year": 2017,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://link.springer.com/article/10.1186/s12970-017-0177-8",
+      "stance": "evidence",
+      "claim": "Position stand recommends 1.4-2.0 g/kg/day for most exercising individuals and frames per-meal doses of ~20-40 g as context-dependent rather than a fixed absorption limit.",
+      "ratio": "1.4-2.0 g/kg/day",
+      "verified": true,
+      "note": "Society-level synthesis the pop layer never quotes."
+    },
+    {
+      "id": "protein_examine_one_sitting",
+      "title": "How Much Protein Can You Eat in One Sitting?",
+      "authors": "Examine (independent nutrition research site)",
+      "year": 2018,
+      "type": "popular",
+      "layer": 5,
+      "url": "https://examine.com/articles/how-much-protein-can-you-eat-in-one-sitting",
+      "stance": "evidence",
+      "claim": "Reviews the dose-response literature (Moore 2009, Symons 2009, Macnaughton 2016) and concludes the body can absorb and use well more than 30 g in one sitting - the '30 g max' is a misreading of acute MPS studies.",
+      "ratio": "no 30 g cap",
+      "verified": false,
+      "note": "Lay-friendly debunk the mutated layer ignores; live page bot-blocked during verification (URL real, archived Jan 2025)."
+    },
+    {
+      "id": "protein_trommelen_2023",
+      "title": "No Upper Limit to the Anabolic Response (100 g vs 25 g)",
+      "authors": "Trommelen J et al. (Cell Rep Med)",
+      "year": 2023,
+      "type": "paper",
+      "layer": 6,
+      "url": "https://www.cell.com/cell-reports-medicine/fulltext/S2666-3791(23)00540-2",
+      "stance": "isolated_truth",
+      "claim": "100 g milk protein produced a greater and more prolonged (>12 h) anabolic response than 25 g, with amino-acid incorporation rising dose-dependently - the response had 'no upper limit in magnitude and duration' in vivo in humans.",
+      "ratio": "100 g vs 25 g",
+      "verified": true,
+      "note": "The lonely, ignored endpoint: the only node cited by none of the popular chain - four times the 'max' and the curve was still climbing."
+    }
+  ],
+  "edges": [
+    {
+      "source": "protein_today_per_meal",
+      "target": "protein_moore_2009",
+      "strength": 0.75,
+      "confidence": 0.15,
+      "kind": "mutated",
+      "label": "turns a 20 g MPS plateau into a 30-40 g digestive ceiling"
+    },
+    {
+      "source": "protein_mens_health_3hours",
+      "target": "protein_moore_2009",
+      "strength": 0.6,
+      "confidence": 0.2,
+      "kind": "mutated",
+      "label": "'every 3 hours, ~30 g per meal' derives from the leg-exercise plateau"
+    },
+    {
+      "source": "protein_reddit_scientificnutrition",
+      "target": "protein_moore_2009",
+      "strength": 0.5,
+      "confidence": 0.3,
+      "kind": "mutated",
+      "label": "repeats the 20-30 g ceiling as a premise needing no citation"
+    },
+    {
+      "source": "protein_unitypoint_daily",
+      "target": "protein_moore_2009",
+      "strength": 0.55,
+      "confidence": 0.25,
+      "kind": "mutated",
+      "label": "'15-30 g at a time, >40 g not beneficial' misreads the 20 g dose-response"
+    },
+    {
+      "source": "protein_schoenfeld_aragon_2018",
+      "target": "protein_moore_2009",
+      "strength": 0.8,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "reviews Moore as the origin of the ~20-25 g plateau"
+    },
+    {
+      "source": "protein_macnaughton_2016",
+      "target": "protein_moore_2009",
+      "strength": 0.75,
+      "confidence": 0.8,
+      "kind": "faithful",
+      "label": "cites Moore's 20-25 g figure, then shows 40 g beats 20 g"
+    },
+    {
+      "source": "protein_symons_2009",
+      "target": "protein_moore_2009",
+      "strength": 0.5,
+      "confidence": 0.7,
+      "kind": "faithful",
+      "label": "parallel 30 g dose-response data from the same lab era"
+    },
+    {
+      "source": "protein_issn_position_2017",
+      "target": "protein_moore_2009",
+      "strength": 0.6,
+      "confidence": 0.75,
+      "kind": "faithful",
+      "label": "position stand contextualizes per-meal dosing"
+    },
+    {
+      "source": "protein_examine_one_sitting",
+      "target": "protein_moore_2009",
+      "strength": 0.7,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "debunks the ceiling using Moore itself"
+    },
+    {
+      "source": "protein_trommelen_2023",
+      "target": "protein_moore_2009",
+      "strength": 0.65,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "directly retests the 20-25 g plateau that mutated"
+    },
+    {
+      "source": "protein_schoenfeld_aragon_2018",
+      "target": "protein_macnaughton_2016",
+      "strength": 0.5,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "cites the 40 g whole-body-training result"
+    },
+    {
+      "source": "protein_macnaughton_2016",
+      "target": "protein_symons_2009",
+      "strength": 0.45,
+      "confidence": 0.8,
+      "kind": "faithful",
+      "label": "builds on the 30 g beef-meal plateau finding"
+    },
+    {
+      "source": "protein_mens_health_3hours",
+      "target": "protein_today_per_meal",
+      "strength": 0.35,
+      "confidence": 0.4,
+      "kind": "overstated",
+      "label": "same lore echoed across mainstream fitness media"
+    }
+  ]
+}

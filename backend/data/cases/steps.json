@@ -1,0 +1,245 @@
+{
+  "case_id": "steps",
+  "nodes": [
+    {
+      "id": "steps_wikipedia_pedometer",
+      "title": "Wikipedia: Pedometer ('10,000 steps')",
+      "authors": "Wikipedia contributors",
+      "year": 2026,
+      "type": "popular",
+      "layer": 1,
+      "url": "https://en.wikipedia.org/wiki/Pedometer",
+      "stance": "mutated_claim",
+      "claim": "Repeats 10,000 steps a day as the standard walking recommendation, documents the origin as Kato's manpo-kei 'ten-thousand step-meter', and notes most health benefit is obtained by around 7,000 steps per day.",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "Layer-1 amplifier: canonizes the number while quietly embedding its marketing origin; living page (snapshot verified Sep 2026).",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_stylist_10k",
+      "title": "How walking 10,000 steps a day changes your body",
+      "authors": "Webster A (Stylist)",
+      "year": 2024,
+      "type": "popular",
+      "layer": 1,
+      "url": "https://www.stylist.co.uk/fitness-health/workouts/how-body-changes-10000-steps-a-day/900114",
+      "stance": "mutated_claim",
+      "claim": "Promises body transformations from walking 10,000 steps a day over 3 months while conceding the target was 'a marketing ploy that dates back to a Japanese pedometer brand in the 1960s' and suggesting 7,500 steps may suffice.",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "Typical modern hype node: debunk caveat in passing, 10,000 kept in the headline and goal.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_atlantic_tracker_default",
+      "title": "You Don't Need to Walk 10,000 Steps Every Day",
+      "authors": "Mull A (The Atlantic)",
+      "year": 2019,
+      "type": "popular",
+      "layer": 2,
+      "url": "https://www.theatlantic.com/health/archive/2019/05/10000-steps-rule/590785/",
+      "stance": "mutated_claim",
+      "claim": "Reports that 10,000 steps is 'the default daily goal for some of the most popular activity trackers on the market' despite tracing the figure to Yamasa's 1965 marketing pedometer, and notes mortality rates level off at about 7,500 steps.",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "Names the tracker-default mechanism that cemented the number on millions of wrists.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_uoft_staff_challenge",
+      "title": "U of T 10,000 Steps Challenge for Staff",
+      "authors": "University of Toronto People & Culture",
+      "year": 2024,
+      "type": "authority",
+      "layer": 3,
+      "url": "https://people.utoronto.ca/memos/sign-up-for-u-of-ts-10000-steps-challenge-for-staff/",
+      "stance": "mutated_claim",
+      "claim": "Month-long staff wellness challenge (May 1-31, 2024, run with Incentfit) in which teams win prizes by averaging 10,000 steps per day.",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "Workplace-challenge variant: the product number institutionalized as HR wellness policy.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_duesseldorf_10k",
+      "title": "'10,000 Steps Duesseldorf' campaign",
+      "authors": "Fialho et al. (Int J Behav Nutr Phys Act)",
+      "year": 2025,
+      "type": "report",
+      "layer": 3,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690824/",
+      "stance": "mutated_claim",
+      "claim": "Evaluates the '10,000 Steps Duesseldorf' city-wide campaign promoting 10,000 steps/day (627 participants at baseline); intervention participants walked only ~462 more steps/day than controls and rates of actually reaching 10,000 did not differ.",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "The mutation scaled to municipal policy: a city program named for a pedometer slogan, with no origin science cited.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_yamasa_manpokei",
+      "title": "Yamasa 'Manpo-kei' pedometer",
+      "authors": "Yamasa Corp (pedometer marketing)",
+      "year": 1965,
+      "type": "expert_practice",
+      "layer": 4,
+      "url": "https://www.health.harvard.edu/blog/10000-steps-a-day-or-fewer-2019071117305",
+      "stance": "pivotal",
+      "claim": "The 10,000-steps figure began as 'Manpo-kei' (ten-thousand-steps meter), the name of Yamasa's 1965 pedometer launched around the 1964 Tokyo Olympics fitness boom - a marketing slogan, not a scientific finding; Harvard Health confirms 'the name was a marketing tool.'",
+      "ratio": "10,000 steps",
+      "verified": true,
+      "note": "True origin of the number: a Japanese product name recast worldwide as a clinical commandment (origin documented by Harvard Health, Jul 2019).",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_lee2019_jama",
+      "title": "Step volume & intensity vs mortality in older women",
+      "authors": "Lee IM et al. (JAMA Intern Med)",
+      "year": 2019,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6547157/",
+      "stance": "evidence",
+      "claim": "Among 16,741 women (mean age 72) wearing accelerometers, more daily steps were associated with lower all-cause mortality until approximately 7,500 steps/day, with no further mortality benefit beyond that point.",
+      "ratio": "7,500 steps",
+      "verified": true,
+      "note": "First large cohort to show the mortality plateau sits ~25% below the folk target. JAMA Intern Med 2019;179(8):1105-1112.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_saintmaurice2020_jama",
+      "title": "Daily step count & mortality in US adults (NHANES)",
+      "authors": "Saint-Maurice PF et al. (JAMA)",
+      "year": 2020,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7093766/",
+      "stance": "evidence",
+      "claim": "Among 4,840 US adults aged 40+, a greater daily step count was significantly associated with lower all-cause mortality, with benefit concentrated around 8,000 steps/day versus ~4,000; step intensity was not associated with mortality after adjustment for step volume.",
+      "ratio": "8,000 steps",
+      "verified": true,
+      "note": "National-sample cohort evidence that the benefit concentrates well below 10,000. JAMA 2020;323(12):1151-1160.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_paluch2022_lancet",
+      "title": "Daily steps & all-cause mortality: 15-cohort meta-analysis",
+      "authors": "Paluch E et al. (Lancet Public Health)",
+      "year": 2022,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9289978/",
+      "stance": "evidence",
+      "claim": "Across 47,471 adults in 15 international cohorts, more steps per day were associated with progressively lower all-cause mortality up to about 6,000-8,000 steps/day for adults aged 60+ and 8,000-10,000 for younger adults, with no special additional benefit at 10,000 itself.",
+      "ratio": "6,000-8,000 steps (age 60+); 8,000-10,000 (younger)",
+      "verified": true,
+      "note": "Definitive dose-response meta-analysis: 10,000 was never a threshold. Lancet Public Health 2022;7(3):e219-e228.",
+      "case_id": "steps"
+    },
+    {
+      "id": "steps_cardia_2021_isolated",
+      "title": "Steps per day & mortality in middle age (CARDIA)",
+      "authors": "Paluch E et al. (JAMA Netw Open)",
+      "year": 2021,
+      "type": "paper",
+      "layer": 6,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8417757/",
+      "stance": "isolated_truth",
+      "claim": "Among 2,110 Black and White men and women aged 38-50 in the CARDIA cohort, taking approximately 7,000 steps/day or more was associated with lower mortality than taking fewer than 7,000, with mortality rates leveling out at higher step counts.",
+      "ratio": "7,000 steps",
+      "verified": true,
+      "note": "Strong cohort evidence sitting entirely outside the hype chain - cited by none of the popular layer. JAMA Netw Open 2021;4(9):e2124516.",
+      "case_id": "steps"
+    }
+  ],
+  "edges": [
+    {
+      "source": "steps_wikipedia_pedometer",
+      "target": "steps_yamasa_manpokei",
+      "strength": 0.6,
+      "confidence": 0.8,
+      "kind": "faithful",
+      "label": "documents manpo-kei 'ten-thousand step-meter' origin"
+    },
+    {
+      "source": "steps_atlantic_tracker_default",
+      "target": "steps_yamasa_manpokei",
+      "strength": 0.7,
+      "confidence": 0.7,
+      "kind": "faithful",
+      "label": "traces tracker default to 1965 Yamasa marketing slogan"
+    },
+    {
+      "source": "steps_stylist_10k",
+      "target": "steps_yamasa_manpokei",
+      "strength": 0.9,
+      "confidence": 0.35,
+      "kind": "mutated",
+      "label": "admits 'marketing ploy' but keeps 10,000 as the goal"
+    },
+    {
+      "source": "steps_uoft_staff_challenge",
+      "target": "steps_yamasa_manpokei",
+      "strength": 0.5,
+      "confidence": 0.15,
+      "kind": "mutated",
+      "label": "product name recast as clinical commandment"
+    },
+    {
+      "source": "steps_duesseldorf_10k",
+      "target": "steps_yamasa_manpokei",
+      "strength": 0.4,
+      "confidence": 0.2,
+      "kind": "mutated",
+      "label": "city campaign hard-codes 10,000 steps, no origin science cited"
+    },
+    {
+      "source": "steps_atlantic_tracker_default",
+      "target": "steps_lee2019_jama",
+      "strength": 0.7,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "reports mortality benefit levels off near 7,500 steps"
+    },
+    {
+      "source": "steps_saintmaurice2020_jama",
+      "target": "steps_lee2019_jama",
+      "strength": 0.7,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "cites older-women cohort as prior evidence (ref 3)"
+    },
+    {
+      "source": "steps_paluch2022_lancet",
+      "target": "steps_lee2019_jama",
+      "strength": 0.8,
+      "confidence": 0.95,
+      "kind": "faithful",
+      "label": "cites WHI cohort's ~7,500-step plateau (ref 5)"
+    },
+    {
+      "source": "steps_paluch2022_lancet",
+      "target": "steps_saintmaurice2020_jama",
+      "strength": 0.9,
+      "confidence": 0.95,
+      "kind": "faithful",
+      "label": "incorporates NHANES cohort evidence (ref 6)"
+    },
+    {
+      "source": "steps_cardia_2021_isolated",
+      "target": "steps_lee2019_jama",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "cites older-women cohort as prior evidence (ref 12)"
+    },
+    {
+      "source": "steps_cardia_2021_isolated",
+      "target": "steps_saintmaurice2020_jama",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "cites NHANES step-mortality analysis (ref 4)"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+ "case_id": "house",
+ "nodes": [
+  {
+   "id": "house_fox_buckingham",
+   "title": "Look inside the most expensive house in the world",
+   "authors": "Fox News",
+   "year": 2024,
+   "type": "popular",
+   "layer": 1,
+   "url": "https://www.foxnews.com/world/look-inside-most-expensive-house-world-home-uks-monarch",
+   "stance": "mutated_claim",
+   "claim": "Calls Buckingham Palace the most expensive house in the world at $4.9 billion, citing no source for the figure, while noting Antilia is worth between $1 billion and $2 billion.",
+   "ratio": "$4.9 B",
+   "verified": true,
+   "note": "Most-viral mutation: assigns a market price to non-saleable Crown property with no citation."
+  },
+  {
+   "id": "house_supercarblondie",
+   "title": "Inside $4.6 billion home of one of world's richest people",
+   "authors": "Daisy Edwards (Supercar Blondie)",
+   "year": 2025,
+   "type": "popular",
+   "layer": 1,
+   "url": "https://supercarblondie.com/inside-4-6-billion-home-of-one-of-worlds-richest-people-including-168-car-garage/",
+   "stance": "mutated_claim",
+   "claim": "Repeats that Mukesh Ambani's Antilia is a $4.6 billion home with a snow room, spa, ice cream parlor and 168-car garage, citing no source.",
+   "ratio": "$4.6 B",
+   "verified": true,
+   "note": "Viral lifestyle piece mirroring the Financial Express headline's exact amenity list while dropping the source."
+  },
+  {
+   "id": "house_premiumrealestate",
+   "title": "Most Expensive House in The World 2026",
+   "authors": "Premium Real Estate (blog)",
+   "year": 2026,
+   "type": "popular",
+   "layer": 1,
+   "url": "https://premiumrealestate.pro/most-expensive-house-in-the-world/",
+   "stance": "mutated_claim",
+   "claim": "Ranks Buckingham Palace as the most expensive house in the world at $4.9 billion and gives Antilia a $2-4.6 billion range.",
+   "ratio": "$4.9 B / $4.6 B",
+   "verified": true,
+   "note": "SEO listicle fusing the Fox Buckingham figure with the FE/Wikipedia Antilia figure."
+  },
+  {
+   "id": "house_richest_2025",
+   "title": "The Most Expensive Houses In The World In 2025",
+   "authors": "TheRichest",
+   "year": 2025,
+   "type": "popular",
+   "layer": 1,
+   "url": "https://www.therichest.com/the-most-expensive-houses-in-the-world-in-2025/",
+   "stance": "mutated_claim",
+   "claim": "Lists Buckingham Palace as the most expensive house in the world at $4.9 billion and Antilia at $2 billion.",
+   "ratio": "$4.9 B",
+   "verified": true,
+   "note": "Listicle repeating the unsourced $4.9B Buckingham tag alongside the real $2B Antilia cost."
+  },
+  {
+   "id": "house_jagranjosh",
+   "title": "What is the Most Expensive House in the World?",
+   "authors": "Jasreet Kaur (Jagran Josh)",
+   "year": 2025,
+   "type": "popular",
+   "layer": 2,
+   "url": "https://www.jagranjosh.com/general-knowledge/most-expensive-house-in-the-world-1745829494-1",
+   "stance": "mutated_claim",
+   "claim": "Names Buckingham Palace the most expensive house in the world at $4.9 billion, with Antilia listed at $2 billion, citing no source.",
+   "ratio": "$4.9 B",
+   "verified": true,
+   "note": "General-knowledge study material canonizing the unsourced Buckingham figure for Indian exam-prep audiences."
+  },
+  {
+   "id": "house_wikipedia_antilia",
+   "title": "Antilia (building) — Wikipedia",
+   "authors": "Wikipedia contributors",
+   "year": 2023,
+   "type": "authority",
+   "layer": 3,
+   "url": "https://en.wikipedia.org/wiki/Antilia_(building)",
+   "stance": "mutated_claim",
+   "claim": "States Antilia is valued at $4.6 billion citing the Financial Express article, while noting its construction cost was almost US$2 billion.",
+   "ratio": "$4.6 B",
+   "verified": true,
+   "note": "Adopted the FE $4.6B figure (ref tagged '[unreliable source]'); downstream listicles copy-pasted it, some keeping the tag artifact."
+  },
+  {
+   "id": "house_ad_india",
+   "title": "Inside Antilia, a $2 billion Mumbai mansion",
+   "authors": "AD Insider (Architectural Digest India)",
+   "year": 2017,
+   "type": "popular",
+   "layer": 3,
+   "url": "https://www.architecturaldigest.in/content/mukesh-ambani-antilia-home-mumbai",
+   "stance": "mutated_claim",
+   "claim": "Reports Antilia's value as between $1 billion and $2 billion, the real build-cost reporting now circulating alongside the $4.6B myth.",
+   "ratio": "$1-2 B",
+   "verified": true,
+   "note": "The accurate cost figure presented in the same popular layer; current headline rounds it to $2 billion."
+  },
+  {
+   "id": "house_fe_antilia",
+   "title": "Mukesh Ambani's 4.6 billion 27-story skyscraper home",
+   "authors": "Bhargava E (Financial Express)",
+   "year": 2023,
+   "type": "popular",
+   "layer": 4,
+   "url": "https://www.financialexpress.com/life/lifestyle-mukesh-ambanis-4-6-billion-27-story-skyscraper-home-has-a-snow-room-spa-ice-cream-parlor-and-more-2891686",
+   "stance": "pivotal",
+   "claim": "Values Mukesh Ambani's 27-storey Mumbai home Antilia at $4.6 billion.",
+   "ratio": "$4.6 B",
+   "verified": true,
+   "note": "Origin of the number: a projection exercise compounding Mumbai residential price appreciation onto Antilia's ~$1-2B build cost, presented as a market valuation; page is JS-rendered, content verified via Wayback snapshot and Wikipedia's citation of it (19 Apr 2023)."
+  },
+  {
+   "id": "house_express_buckingham",
+   "title": "Buckingham Palace listed for sale in spoof advert",
+   "authors": "Emily Ferguson (Express)",
+   "year": 2020,
+   "type": "popular",
+   "layer": 5,
+   "url": "https://www.express.co.uk/news/royal/1340434/buckingham-palace-for-sale-royal-family-expenses-buckingham-palace-worth-cost",
+   "stance": "evidence",
+   "claim": "Reports that Buckingham Palace is not actually for sale after Emoov's spoof advert valued it at about £4.9 billion by multiplying £64,831 per square metre across 77,000 m².",
+   "ratio": "≈£4.9 B (~$6 B)",
+   "verified": true,
+   "note": "Documents the spoof-estimate methodology and the palace's non-saleable status that the $4.9B headlines omit."
+  },
+  {
+   "id": "house_griffin_record",
+   "title": "$238M Central Park apartment, highest price ever in US",
+   "authors": "CNN Business (KBZK)",
+   "year": 2019,
+   "type": "popular",
+   "layer": 5,
+   "url": "https://www.kbzk.com/cnn-business-consumer/2019/01/25/an-apartment-on-central-park-just-sold-for-238-million-thats-the-highest-price-ever-paid-for-a-home-in-the-us/",
+   "stance": "evidence",
+   "claim": "Ken Griffin's $238 million penthouse at 220 Central Park South was the highest price ever paid for a home in the US, breaking the prior $137 million record.",
+   "ratio": "$238 M",
+   "verified": true,
+   "note": "Verified most expensive US home sale ever; stands in for the paywalled WSJ original (401), verified via CNN syndication."
+  },
+  {
+   "id": "house_villa_leopolda",
+   "title": "Russian billionaire loses $54m deposit on world's most expensive home",
+   "authors": "Diana Golobay (HousingWire)",
+   "year": 2010,
+   "type": "popular",
+   "layer": 6,
+   "url": "https://www.housingwire.com/articles/russian-billionaire-loses-54m-deposit-worlds-most-expensive-home-plus-15m-interest",
+   "stance": "isolated_truth",
+   "claim": "Mikhail Prokhorov agreed to buy Villa Leopolda for £360 million but forfeited his $54 million deposit plus $1.5 million interest when he backed out, so the sale never completed.",
+   "ratio": "$54 M deposit (on £360 M)",
+   "verified": true,
+   "note": "Lonely court-record fact: even the most famous 'world's most expensive home' sale collapsed at ~£360M — no $4B transaction has ever existed."
+  }
+ ],
+ "edges": [
+  {
+   "source": "house_fox_buckingham",
+   "target": "house_express_buckingham",
+   "strength": 0.5,
+   "confidence": 0.25,
+   "kind": "mutated",
+   "label": "non-saleable Crown property assigned a price"
+  },
+  {
+   "source": "house_jagranjosh",
+   "target": "house_fox_buckingham",
+   "strength": 0.55,
+   "confidence": 0.35,
+   "kind": "mutated",
+   "label": "repeats Fox's $4.9B Buckingham"
+  },
+  {
+   "source": "house_jagranjosh",
+   "target": "house_ad_india",
+   "strength": 0.35,
+   "confidence": 0.8,
+   "kind": "faithful",
+   "label": "Antilia $2B matches real reporting"
+  },
+  {
+   "source": "house_richest_2025",
+   "target": "house_fox_buckingham",
+   "strength": 0.6,
+   "confidence": 0.3,
+   "kind": "mutated",
+   "label": "repeats $4.9B Buckingham Palace"
+  },
+  {
+   "source": "house_premiumrealestate",
+   "target": "house_fox_buckingham",
+   "strength": 0.5,
+   "confidence": 0.35,
+   "kind": "mutated",
+   "label": "repeats Fox's $4.9B Buckingham"
+  },
+  {
+   "source": "house_premiumrealestate",
+   "target": "house_fe_antilia",
+   "strength": 0.7,
+   "confidence": 0.3,
+   "kind": "mutated",
+   "label": "compounded projection reported as market value"
+  },
+  {
+   "source": "house_premiumrealestate",
+   "target": "house_wikipedia_antilia",
+   "strength": 0.6,
+   "confidence": 0.35,
+   "kind": "mutated",
+   "label": "echoes Wikipedia's $4.6B"
+  },
+  {
+   "source": "house_supercarblondie",
+   "target": "house_fe_antilia",
+   "strength": 0.8,
+   "confidence": 0.35,
+   "kind": "mutated",
+   "label": "compounded projection reported as market value"
+  },
+  {
+   "source": "house_supercarblondie",
+   "target": "house_wikipedia_antilia",
+   "strength": 0.6,
+   "confidence": 0.35,
+   "kind": "mutated",
+   "label": "echoes Wikipedia's $4.6B"
+  },
+  {
+   "source": "house_wikipedia_antilia",
+   "target": "house_fe_antilia",
+   "strength": 0.9,
+   "confidence": 0.8,
+   "kind": "faithful",
+   "label": "adopts FE $4.6B valuation"
+  },
+  {
+   "source": "house_fox_buckingham",
+   "target": "house_ad_india",
+   "strength": 0.4,
+   "confidence": 0.8,
+   "kind": "faithful",
+   "label": "Antilia $1-2B figure matches real reporting"
+  },
+  {
+   "source": "house_fe_antilia",
+   "target": "house_ad_india",
+   "strength": 0.6,
+   "confidence": 0.7,
+   "kind": "overstated",
+   "label": "$1-2B build cost compounded into $4.6B projection"
+  }
+ ]
+}

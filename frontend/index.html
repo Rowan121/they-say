@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ground Truthing · How the Hummingbird "1:4 Rule" Mutated</title>
+<title>They Say · Ground Truthing</title>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <style>
   :root{
@@ -17,15 +17,42 @@
      radial-gradient(1200px 700px at 78% -8%, #16223b 0%, rgba(22,34,59,0) 60%),
      radial-gradient(900px 600px at 8% 108%, #16283b 0%, rgba(22,40,59,0) 55%),
      linear-gradient(180deg,var(--bg0),var(--bg1));color:var(--ink);overflow:hidden}
-  #app{display:grid;grid-template-columns:340px 1fr;height:100vh}
+  b{font-weight:650}
 
-  /* ---- left rail ---- */
+  /* ============ landing ============ */
+  #landing{display:none;flex-direction:column;height:100vh;overflow:auto}
+  .hero{padding:9vh 24px 4vh;text-align:center;max-width:920px;margin:0 auto}
+  .kicker{font-size:11px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase}
+  .hero h1{font-size:clamp(30px,4.6vw,52px);margin:14px 0 16px;line-height:1.08;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--claim),var(--truth));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:15px;line-height:1.65;color:var(--ink-dim);max-width:640px;margin:0 auto}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;padding:12px 24px 40px;max-width:1180px;margin:0 auto;width:100%}
+  .card{position:relative;border:1px solid var(--panel-brd);border-radius:18px;padding:20px 20px 16px;cursor:pointer;
+        background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));transition:.18s;overflow:hidden}
+  .card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:var(--accent,#888);opacity:.85}
+  .card:hover{transform:translateY(-4px);border-color:rgba(160,190,255,.4);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .card .ci{font-size:26px;margin-bottom:10px}
+  .card h3{margin:0 0 8px;font-size:16.5px}
+  .card .cq{font-size:13px;color:var(--ink);opacity:.92;line-height:1.5;border-left:3px solid var(--accent,#888);padding-left:10px;margin:0 0 10px;font-style:italic}
+  .card .cs{font-size:12px;color:var(--ink-dim);line-height:1.55;margin:0 0 14px}
+  .card .cf{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink-faint)}
+  .badge{font-size:9.5px;padding:2px 8px;border-radius:20px;font-weight:800;letter-spacing:.6px}
+  .badge.strong{color:#052e1b;background:#4ade80}
+  .badge.moderate{color:#3a2a05;background:#fbbf24}
+  .card .go{margin-left:auto;color:var(--ink-dim);font-weight:600}
+  .landing-foot{text-align:center;font-size:10.5px;color:var(--ink-faint);padding:0 20px 26px}
+
+  /* ============ case view ============ */
+  #app{display:none;grid-template-columns:340px 1fr;height:100vh}
   aside{border-right:1px solid var(--panel-brd);backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(14,20,34,.85),rgba(10,14,23,.7));
         display:flex;flex-direction:column;min-height:0}
-  .brand{padding:20px 22px 14px}
+  .brand{padding:18px 22px 12px}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-faint);text-decoration:none;margin-bottom:12px;cursor:pointer}
+  .back:hover{color:var(--ink)}
   .brand h1{font-size:18px;margin:0 0 4px;letter-spacing:.2px}
   .brand h1 span{background:linear-gradient(90deg,var(--claim),var(--truth));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .brand p{margin:0;font-size:12.5px;line-height:1.5;color:var(--ink-dim)}
+  .brand .cclaim{font-size:12.5px;line-height:1.5;color:var(--ink);font-style:italic;border-left:3px solid var(--accent,#888);padding-left:9px;margin:10px 0 8px}
+  .brand p{margin:0;font-size:11.5px;line-height:1.5;color:var(--ink-dim)}
   .rail-scroll{overflow:auto;padding:6px 14px 20px;min-height:0}
   .section-t{font-size:10.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--ink-faint);margin:16px 8px 8px}
 
@@ -44,13 +71,17 @@
   .verif{color:#0a0e17;background:var(--truth)}
   .ratio{border:1px solid var(--panel-brd);color:var(--ink-dim);border-radius:20px;padding:1px 7px;font-size:10px}
 
-  /* ---- stage ---- */
   main{position:relative;min-width:0}
-  .stage-head{position:absolute;top:16px;left:22px;right:22px;z-index:5;pointer-events:none;display:flex;justify-content:space-between;gap:20px}
-  .stage-head .lbl{font-size:11px;color:var(--ink-faint);letter-spacing:1.5px;text-transform:uppercase}
+  .stage-head{position:absolute;top:14px;left:22px;right:22px;z-index:5;pointer-events:none;display:flex;flex-direction:column;gap:10px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;pointer-events:auto}
+  .cchip{font-size:11.5px;padding:5px 13px;border-radius:30px;border:1px solid var(--panel-brd);background:var(--panel);color:var(--ink-dim);
+         cursor:pointer;backdrop-filter:blur(8px);transition:.15s;white-space:nowrap}
+  .cchip:hover{color:var(--ink);border-color:rgba(160,190,255,.45)}
+  .cchip.active{color:var(--ink);border-color:var(--accent,#c084fc);box-shadow:0 0 0 1px var(--accent,#c084fc) inset;background:rgba(255,255,255,.06)}
+  .head-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .head-row .lbl{font-size:11px;color:var(--ink-faint);letter-spacing:1.5px;text-transform:uppercase}
   .flow{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--ink-dim);background:var(--panel);border:1px solid var(--panel-brd);
         padding:7px 12px;border-radius:30px;pointer-events:auto;backdrop-filter:blur(8px)}
-  .flow b{color:var(--ink)}
   svg{width:100%;height:100%;display:block;cursor:grab}
   svg:active{cursor:grabbing}
   .link{fill:none;stroke-linecap:round}
@@ -65,7 +96,7 @@
   .halo{filter:blur(9px);opacity:.55}
 
   /* detail */
-  #detail{position:absolute;right:18px;top:70px;width:310px;background:var(--panel);border:1px solid var(--panel-brd);border-radius:16px;
+  #detail{position:absolute;right:18px;top:96px;width:310px;background:var(--panel);border:1px solid var(--panel-brd);border-radius:16px;
           padding:16px 17px;backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateX(20px);opacity:0;
           pointer-events:none;transition:.2s;z-index:6}
   #detail.show{transform:none;opacity:1;pointer-events:auto}
@@ -83,11 +114,28 @@
 </style>
 </head>
 <body>
+
+<!-- ================= landing ================= -->
+<div id="landing">
+  <div class="hero">
+    <div class="kicker">They Say · Ground Truthing</div>
+    <h1>Common knowledge has a citation trail.<br/>Sometimes it leads <em>nowhere the paper went.</em></h1>
+    <p>Each case below is a "fact" everyone repeats — traced back to what the source actually found.
+       Watch a real result mutate as it spreads, while the counter-evidence sits ignored off to the side.
+       Click a case to walk its mutation graph.</p>
+  </div>
+  <div class="cards" id="cards"></div>
+  <div class="landing-foot" id="landingFoot"></div>
+</div>
+
+<!-- ================= case view ================= -->
 <div id="app">
   <aside>
     <div class="brand">
-      <h1>Ground <span>Truthing</span></h1>
-      <p>Tracing how a single mis-read paper fans out into "common knowledge" — the hummingbird <b>1&nbsp;:&nbsp;4 sugar rule</b>. Edge <b>thickness</b> = citation strength · <b>color</b> = confidence the citation is faithful.</p>
+      <a class="back" onclick="location.hash=''">← all cases</a>
+      <h1 id="caseTitle">—</h1>
+      <div class="cclaim" id="caseClaim"></div>
+      <p id="caseSummary"></p>
     </div>
     <div class="rail-scroll">
       <div class="section-t">Confidence in each link</div>
@@ -96,22 +144,25 @@
 
       <div class="section-t">Node types</div>
       <div class="legend">
-        <div class="lg"><span class="dot" style="background:var(--claim)"></span> Popularized claim ("1:4 gospel")</div>
-        <div class="lg"><span class="dot" style="background:var(--pivotal)"></span> Pivotal paper — misread anchor</div>
+        <div class="lg"><span class="dot" style="background:var(--claim)"></span> Popularized claim</div>
+        <div class="lg"><span class="dot" style="background:var(--pivotal)"></span> Pivotal source — misread anchor</div>
         <div class="lg"><span class="dot" style="background:var(--evidence)"></span> Overlooked evidence</div>
-        <div class="lg"><span class="dot" style="background:var(--truth)"></span> Isolated counter-truth (~50%)</div>
+        <div class="lg"><span class="dot" style="background:var(--truth)"></span> Isolated counter-truth</div>
       </div>
 
-      <div class="section-t">Corpus · common body of knowledge</div>
+      <div class="section-t" id="corpusTitle">Corpus</div>
       <div id="paperList"></div>
     </div>
-    <div class="foot">Data live from <b>Neo4j Aura · 04bf4cb1</b> → <b>graph.json</b>. 20 documents · 23 citations.</div>
+    <div class="foot" id="railFoot"></div>
   </aside>
 
   <main>
     <div class="stage-head">
-      <div class="lbl">Mutation &nbsp;⟵&nbsp; propagation &nbsp;⟶&nbsp; the anchor &nbsp;⟶&nbsp; overlooked evidence &nbsp;⟶&nbsp; isolated truth</div>
-      <div class="flow"><span>Click any paper · drag to explore</span></div>
+      <div class="chips" id="chips"></div>
+      <div class="head-row">
+        <div class="lbl">Popular claim &nbsp;⟶&nbsp; propagation &nbsp;⟶&nbsp; the source &nbsp;⟶&nbsp; overlooked evidence &nbsp;⟶&nbsp; isolated truth</div>
+        <div class="flow"><span>Click any node · drag to explore</span></div>
+      </div>
     </div>
     <svg id="svg"></svg>
     <div id="detail">
@@ -130,38 +181,119 @@
 <script>
 const STANCE = {
   mutated_claim:{c:'#ff6b5e', name:'Popularized claim'},
-  pivotal:{c:'#c084fc', name:'Pivotal · misread anchor'},
+  pivotal:{c:'#c084fc', name:'Pivotal source · misread anchor'},
   evidence:{c:'#34d0b4', name:'Overlooked evidence'},
   isolated_truth:{c:'#ffd166', name:'Isolated counter-truth'}
 };
-// x target by layer (fraction of width); fan converges on the anchor (layer 4)
 const COLX = {1:0.11, 2:0.26, 3:0.40, 4:0.55, 5:0.74, 6:0.92};
 const conf2color = d3.scaleLinear().domain([0,0.5,1]).range(['#ef4444','#f59e0b','#22c55e']).interpolate(d3.interpolateRgb);
 
-let nodes, edges, sim, node, link, linkHalo;
+let DATA=null, CASE=null, nodes=[], edges=[], sim, node, link, linkHalo;
 const svg = d3.select('#svg');
 let W = 0, H = 0;
 
+d3.json('graph.json').then(data=>{
+  DATA = data;
+  DATA.nodes.forEach(n=>{ if(!n.case_id) n.case_id='hummingbird'; });
+  buildLanding();
+  buildChips();
+  window.addEventListener('hashchange', renderApp);
+  window.addEventListener('resize', ()=>{ if(CASE) layout(true); });
+  renderApp();
+});
+
+const caseById = id => DATA.cases.find(c=>c.id===id);
+const shortTitle = c => c.title.replace(/^The /,'');
+
+function renderApp(){
+  const id = (location.hash||'').replace('#','');
+  const c = caseById(id);
+  if(c){ showCase(c); } else { showLanding(); }
+}
+
+function showLanding(){
+  CASE=null;
+  document.getElementById('landing').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.title='They Say · Ground Truthing';
+}
+
+function showCase(c){
+  CASE=c;
+  hideDetail();
+  document.getElementById('landing').style.display='none';
+  document.getElementById('app').style.display='grid';
+  document.title='They Say · '+c.title;
+
+  nodes = DATA.nodes.filter(n=>n.case_id===c.id).map(d=>Object.assign({},d));
+  const ids = new Set(nodes.map(n=>n.id));
+  edges = DATA.edges.filter(e=>ids.has(e.source)&&ids.has(e.target)).map(d=>Object.assign({},d));
+
+  document.getElementById('caseTitle').textContent=c.title;
+  document.getElementById('caseClaim').textContent=c.popular_claim;
+  document.getElementById('caseSummary').textContent=c.summary;
+  document.getElementById('corpusTitle').textContent='Corpus · '+shortTitle(c);
+  const idx = DATA.cases.indexOf(c);
+  document.getElementById('railFoot').innerHTML =
+    `Case ${idx+1} of ${DATA.cases.length} · <b>${nodes.length} documents</b> · <b>${edges.length} citations</b> · data: graph.json ← Neo4j Aura`;
+
+  buildRail();
+  d3.selectAll('.cchip').classed('active', d=>d && d.id===c.id);
+
+  requestAnimationFrame(()=>layout());
+}
+
+/* ---- landing ---- */
+function buildLanding(){
+  const wrap=document.getElementById('cards');
+  DATA.cases.forEach(c=>{
+    const el=document.createElement('div');
+    el.className='card'; el.style.setProperty('--accent',c.accent);
+    el.innerHTML=`
+      <div class="ci">${c.icon}</div>
+      <h3>${c.title}</h3>
+      <p class="cq">${c.popular_claim}</p>
+      <p class="cs">${c.summary}</p>
+      <div class="cf">
+        <span class="badge ${c.verdict.toLowerCase()}">${c.verdict}</span>
+        <span>${c.doc_count} docs · ${c.edge_count} citations</span>
+        <span class="go">open case →</span>
+      </div>`;
+    el.addEventListener('click',()=>{ location.hash=c.id; });
+    wrap.appendChild(el);
+  });
+  const tn=DATA.nodes.length, te=DATA.edges.length;
+  document.getElementById('landingFoot').textContent=
+    `${DATA.cases.length} cases · ${tn} documents · ${te} citations — They Say / Ground Truthing · Neo4j Aura + GraphRAG backend`;
+}
+
+function buildChips(){
+  const wrap=document.getElementById('chips');
+  DATA.cases.forEach(c=>{
+    const el=document.createElement('button');
+    el.className='cchip';
+    el.style.setProperty('--accent',c.accent);
+    el.__case=c;
+    el.textContent=`${c.icon} ${shortTitle(c)}`;
+    el.addEventListener('click',()=>{ location.hash=c.id; });
+    wrap.appendChild(el);
+  });
+  // keep active state in sync without rebuilding
+  const sync=()=>{ [...wrap.children].forEach(el=>el.classList.toggle('active', el.__case===CASE)); };
+  setInterval(sync,300);
+}
+
+/* ---- graph ---- */
 function shortLabel(n){
-  let a = n.authors.replace(/ \(.*\)/,'').split('&')[0].split(',')[0].trim();
+  let a = (n.authors||'?').replace(/ \(.*\)/,'').split('&')[0].split(',')[0].trim();
   if(a.length>22) a = a.slice(0,21)+'…';
   return a;
 }
-
-d3.json('graph.json').then(data=>{
-  nodes = data.nodes.map(d=>Object.assign({},d));
-  const byId = new Map(nodes.map(n=>[n.id,n]));
-  edges = data.edges.map(e=>Object.assign({}, e, {source:e.source, target:e.target}));
-  buildRail();
-  layout();
-  window.addEventListener('resize', ()=>{layout(true);});
-});
 
 function layout(resizeOnly){
   const rect = svg.node().getBoundingClientRect();
   W = rect.width > 0 ? rect.width : 1280;
   H = rect.height > 0 ? rect.height : 800;
-  // vertical target per node: spread evenly within its layer column
   const groups = d3.group(nodes, d=>d.layer);
   groups.forEach(arr=>{
     arr.sort((a,b)=>a.year-b.year);
@@ -176,11 +308,9 @@ function layout(resizeOnly){
 
   svg.selectAll('*').remove();
   const defs = svg.append('defs');
-  // glow filter
   const f = defs.append('filter').attr('id','glow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
   f.append('feGaussianBlur').attr('stdDeviation','5').attr('result','b');
   const fm=f.append('feMerge'); fm.append('feMergeNode').attr('in','b'); fm.append('feMergeNode').attr('in','SourceGraphic');
-  // arrow markers at a few confidence buckets
   [['lo','#ef4444'],['mid','#f59e0b'],['hi','#22c55e']].forEach(([id,col])=>{
     defs.append('marker').attr('id','arr-'+id).attr('viewBox','0 -5 10 10').attr('refX',9).attr('refY',0)
       .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
@@ -220,7 +350,8 @@ function layout(resizeOnly){
      .attr('fill','rgba(16,22,38,.94)').attr('stroke',STANCE[d.stance].c).attr('stroke-width',iso?2.2:1.4);
     g.append('rect').attr('x',-w/2).attr('y',-23).attr('width',5).attr('height',46).attr('rx',2).attr('fill',STANCE[d.stance].c);
     g.append('text').attr('class','t1').attr('x',-w/2+13).attr('y',-3).text(lab);
-    g.append('text').attr('class','t2').attr('x',-w/2+13).attr('y',12).text(d.year+' · '+d.ratio + (d.verified?'  ✓':''));
+    g.append('text').attr('class','t2').attr('x',-w/2+13).attr('y',12)
+     .text(d.year+(d.ratio?' · '+d.ratio:'')+(d.verified?'  ✓':''));
   });
 
   node.on('click',(ev,d)=>{ev.stopPropagation();focusNode(d);showDetail(d);})
@@ -235,11 +366,8 @@ function layout(resizeOnly){
     .force('x', d3.forceX(d=>d._tx).strength(.55))
     .force('y', d3.forceY(d=>d._ty).strength(.3))
     .on('tick',tick);
-  // keep isolated truth truly apart
   sim.force('charge').strength(d=>d.stance==='isolated_truth'?-720:-340);
-  // pin the isolated counter-truth so it reads as a standalone endpoint
   nodes.filter(d=>d.stance==='isolated_truth').forEach(d=>{d.fx=d._tx; d.fy=d._ty;});
-  // settle synchronously (rAF is throttled when the tab is hidden), then paint
   sim.stop();
   for(let i=0;i<320;i++) sim.tick();
   tick();
@@ -257,7 +385,6 @@ function tick(){
 function arc(e){
   const s=e.source,t=e.target;
   let dx=t.x-s.x, dy=t.y-s.y; const dist=Math.hypot(dx,dy)||1;
-  // trim to node edges (approx rounded-rect radius)
   const sr=(s._w?s._w/2:30)-6, tr=(t._w?t._w/2:30)+8;
   const sx=s.x+dx/dist*Math.min(sr,dist*0.4), sy=s.y+dy/dist*Math.min(28,dist*0.4);
   const tx=t.x-dx/dist*Math.min(tr,dist*0.4), ty=t.y-dy/dist*Math.min(30,dist*0.4);
@@ -277,7 +404,7 @@ function hover(d){
   link.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
   linkHalo.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
 }
-function clearHover(){ if(document.querySelector('.node.focus'))return; node.classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);}
+function clearHover(){ if(document.querySelector('.node.focus'))return; if(!node)return; node.classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);}
 let focused=null;
 function focusNode(d){
   focused=d.id;
@@ -288,13 +415,13 @@ function focusNode(d){
   linkHalo.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
   d3.selectAll('.paper').classed('active',p=>p.__id===d.id);
 }
-function clearFocus(){focused=null;node.classed('focus',false).classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);d3.selectAll('.paper').classed('active',false);}
+function clearFocus(){focused=null;if(node){node.classed('focus',false).classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);}d3.selectAll('.paper').classed('active',false);}
 
 function drag(){
   return d3.drag()
     .on('start',(ev,d)=>{if(!ev.active)sim.alphaTarget(.25).restart();d.fx=d.x;d.fy=d.y;})
     .on('drag',(ev,d)=>{d.fx=ev.x;d.fy=ev.y;})
-    .on('end',(ev,d)=>{if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;});
+    .on('end',(ev,d)=>{if(!ev.active)sim.alphaTarget(0); if(d.stance!=='isolated_truth'){d.fx=null;d.fy=null;}});
 }
 
 /* ---- detail panel ---- */
@@ -304,8 +431,8 @@ function showDetail(d){
   document.getElementById('d_title').textContent=d.title;
   document.getElementById('d_meta').textContent=d.authors+' · '+d.year;
   const row=document.getElementById('d_row'); row.innerHTML='';
-  const rr=document.createElement('span');rr.className='ratio';rr.textContent='ratio: '+d.ratio;row.appendChild(rr);
-  if(d.verified){const v=document.createElement('span');v.className='chip verif';v.textContent='VERIFIED PAPER';row.appendChild(v);}
+  if(d.ratio){const rr=document.createElement('span');rr.className='ratio';rr.textContent='key figure: '+d.ratio;row.appendChild(rr);}
+  if(d.verified){const v=document.createElement('span');v.className='chip verif';v.textContent='VERIFIED SOURCE';row.appendChild(v);}
   document.getElementById('d_claim').textContent=d.claim;
   document.getElementById('d_note').textContent=d.note||'';
   const a=document.getElementById('d_link');a.href=d.url;a.textContent=d.url;
@@ -316,15 +443,15 @@ function hideDetail(){document.getElementById('detail').classList.remove('show')
 /* ---- left rail ---- */
 function buildRail(){
   const list=document.getElementById('paperList');
+  list.innerHTML='';
   const order={mutated_claim:0,pivotal:1,evidence:2,isolated_truth:3};
   const sorted=[...nodes].sort((a,b)=>(order[a.stance]-order[b.stance])||a.layer-b.layer);
   sorted.forEach(d=>{
     const el=document.createElement('div');el.className='paper';el.__id=d.id;
     el.innerHTML=`<div class="pt" style="border-left:3px solid ${STANCE[d.stance].c};padding-left:8px">${d.title}</div>
       <div class="pm" style="padding-left:11px">${d.authors}, ${d.year}
-      <span class="ratio">${d.ratio}</span>${d.verified?'<span class="chip verif">VERIFIED</span>':''}</div>`;
-    el.addEventListener('click',()=>{const n=nodes.find(x=>x.id===d.id);focusNode(n);showDetail(n);
-      if(n.x){/* nudge view center could go here */}});
+      ${d.ratio?`<span class="ratio">${d.ratio}</span>`:''}${d.verified?'<span class="chip verif">VERIFIED</span>':''}</div>`;
+    el.addEventListener('click',()=>{const n=nodes.find(x=>x.id===d.id);focusNode(n);showDetail(n);});
     list.appendChild(el);
   });
 }

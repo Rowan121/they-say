@@ -1,0 +1,248 @@
+{
+  "case_id": "dunningkruger",
+  "nodes": [
+    {
+      "id": "dk_mount_stupid_curve",
+      "title": "Lessons from Mt. Stupid (the fabricated curve)",
+      "authors": "Joseph Paris (blog)",
+      "year": 2014,
+      "type": "popular",
+      "layer": 1,
+      "url": "https://josephparis.me/my-articles/lessons-from-mt-stupid/",
+      "stance": "mutated_claim",
+      "claim": "Blog post that paired the Dunning-Kruger name with a peak-and-trough 'Mt. Stupid' curve that appears in no Dunning-Kruger paper.",
+      "verified": true,
+      "note": "Earliest known version of the viral curve; the chart, not the studies, is what the culture now cites."
+    },
+    {
+      "id": "dk_wikipedia",
+      "title": "Dunning-Kruger effect (Wikipedia)",
+      "authors": "Wikipedia (encyclopedia)",
+      "year": 2005,
+      "type": "popular",
+      "layer": 2,
+      "url": "https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect",
+      "stance": "mutated_claim",
+      "claim": "Defines the effect as poor performers' inability to recognize their own incompetence; covers the 1999 study and the later statistical-artifact critiques.",
+      "verified": true,
+      "note": "The amplifier: codified the pop-law reading for millions while quietly hosting the critiques."
+    },
+    {
+      "id": "dk_healthline_explainer",
+      "title": "The Dunning-Kruger Effect: What It Is & Why It Matters",
+      "authors": "Healthline (health media)",
+      "year": 2020,
+      "type": "popular",
+      "layer": 2,
+      "url": "https://www.healthline.com/health/dunning-kruger-effect",
+      "stance": "mutated_claim",
+      "claim": "Mainstream explainer asserting the effect shows incompetent people overestimating their ability; attributes the finding to the 1999 Kruger-Dunning Cornell studies.",
+      "verified": true,
+      "note": "Typical SEO health-media echo that converts ~350 undergrads into universal life advice."
+    },
+    {
+      "id": "dk_ted_ed_lesson",
+      "title": "Why incompetent people think they're amazing (TED-Ed)",
+      "authors": "TED-Ed (educational video)",
+      "year": 2017,
+      "type": "popular",
+      "layer": 3,
+      "url": "https://ed.ted.com/lessons/why-incompetent-people-think-they-re-amazing-david-dunning",
+      "stance": "mutated_claim",
+      "claim": "Animated lesson in which David Dunning himself presents the effect as people frequently overestimating their own abilities.",
+      "verified": true,
+      "note": "The origin author laundered the pop version into edutainment for millions of viewers."
+    },
+    {
+      "id": "dk_openculture_echo",
+      "title": "The Dunning-Kruger Effect, Explained (Open Culture)",
+      "authors": "Open Culture (blog)",
+      "year": 2024,
+      "type": "popular",
+      "layer": 3,
+      "url": "https://www.openculture.com/2024/02/the-dunning-kruger-effect-explained.html",
+      "stance": "mutated_claim",
+      "claim": "Pop explainer of the effect that cites no source paper and omits the statistical-artifact critiques entirely.",
+      "verified": true,
+      "note": "Shows the mutation in 2024: the 'law' survives with no paper attached."
+    },
+    {
+      "id": "dk_kruger_dunning_1999",
+      "title": "Unskilled and unaware of it",
+      "authors": "Kruger J, Dunning D (JPSP)",
+      "year": 1999,
+      "type": "paper",
+      "layer": 4,
+      "url": "https://sites.lsa.umich.edu/sasi/wp-content/uploads/sites/275/2015/11/krugerdunning99.pdf",
+      "stance": "pivotal",
+      "claim": "Four small studies of ~350 Cornell undergrads: bottom-quartile performers (~12th percentile) self-estimated near the 62nd percentile.",
+      "ratio": "~12th percentile actual vs ~62nd self-estimated",
+      "verified": true,
+      "note": "Origin source; its own authors conceded regression to the mean 'virtually guarantees' the pattern and argued only that it was 'more psychological than artifactual.'"
+    },
+    {
+      "id": "dk_krueger_mueller_2002",
+      "title": "Unskilled, unaware, or both?",
+      "authors": "Krueger J, Mueller RA (JPSP)",
+      "year": 2002,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=11831408&retmode=json",
+      "stance": "evidence",
+      "claim": "Reanalysis showing the apparent miscalibration of low scorers is produced by regression to the mean plus a better-than-average bias, not a metacognitive deficit.",
+      "verified": true,
+      "note": "The 2002 kill-shot the pop version of the effect never mentions."
+    },
+    {
+      "id": "dk_gignac_zajenkowski_2020",
+      "title": "The Dunning-Kruger effect is (mostly) a statistical artefact",
+      "authors": "Gignac GE, Zajenkowski M (Intelligence)",
+      "year": 2020,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.intell.2020.101449?fields=title,year,venue,abstract,externalIds",
+      "stance": "evidence",
+      "claim": "Using a validated signal-detection method in 929 participants, the apparent Dunning-Kruger effect shrinks to '(mostly) a statistical artefact' of measurement conventions.",
+      "ratio": "n=929",
+      "verified": true,
+      "note": "Largest-sample methodological verdict; cited by the field, ignored by pop media."
+    },
+    {
+      "id": "dk_jansen_rafferty_griffiths_2021",
+      "title": "A rational model of the Dunning-Kruger effect",
+      "authors": "Jansen RA et al. (Nat Hum Behav)",
+      "year": 2021,
+      "type": "paper",
+      "layer": 5,
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=33633375&retmode=json",
+      "stance": "evidence",
+      "claim": "A computational model plus two studies of roughly 4,000 people finds low performers are less able to tell whether they are correct, reviving a modest genuine metacognitive deficit.",
+      "verified": true,
+      "note": "The honest nuance node: not artifact-only, but a far weaker effect than the meme."
+    },
+    {
+      "id": "dk_dunning_defense_2022",
+      "title": "The Dunning-Kruger effect and its discontents",
+      "authors": "Dunning D (The Psychologist, BPS)",
+      "year": 2022,
+      "type": "authority",
+      "layer": 5,
+      "url": "https://www.bps.org.uk/psychologist/dunning-kruger-effect-and-its-discontents",
+      "stance": "evidence",
+      "claim": "David Dunning defends the effect as a real metacognitive deficit, arguing the artifact critiques misread the data and ignore contrary research.",
+      "verified": true,
+      "note": "Even the origin author now defends only a weakened, qualified version."
+    },
+    {
+      "id": "dk_nuhfer_2016",
+      "title": "Random Number Simulations Reveal How Random Noise Affects Self-Assessed Competency",
+      "authors": "Nuhfer E et al. (Numeracy)",
+      "year": 2016,
+      "type": "paper",
+      "layer": 6,
+      "url": "https://digitalcommons.usf.edu/numeracy/vol9/iss1/art4/",
+      "stance": "isolated_truth",
+      "claim": "Random-number data containing no psychology at all, plotted with the field's quartile conventions, reproduce the classic Dunning-Kruger curve exactly.",
+      "verified": true,
+      "note": "The killer counter-truth: the curve is an artifact of plotting; essentially nobody cites it."
+    }
+  ],
+  "edges": [
+    {
+      "source": "dk_mount_stupid_curve",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.85,
+      "confidence": 0.05,
+      "kind": "mutated",
+      "label": "chart not in the paper; curve is fabricated"
+    },
+    {
+      "source": "dk_wikipedia",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.6,
+      "confidence": 0.4,
+      "kind": "overstated",
+      "label": "four small studies summarized as a general law of human cognition"
+    },
+    {
+      "source": "dk_healthline_explainer",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.5,
+      "confidence": 0.2,
+      "kind": "mutated",
+      "label": "'incompetent people can't recognize their incompetence' sold as settled science"
+    },
+    {
+      "source": "dk_ted_ed_lesson",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.55,
+      "confidence": 0.35,
+      "kind": "overstated",
+      "label": "origin author retells the studies as a universal lesson in overconfidence"
+    },
+    {
+      "source": "dk_openculture_echo",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.35,
+      "confidence": 0.15,
+      "kind": "mutated",
+      "label": "explains the 'effect' with no paper, no numbers, no caveats"
+    },
+    {
+      "source": "dk_krueger_mueller_2002",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.7,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "reanalysis: asymmetry explained by regression to the mean and better-than-average bias"
+    },
+    {
+      "source": "dk_gignac_zajenkowski_2020",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.7,
+      "confidence": 0.9,
+      "kind": "faithful",
+      "label": "signal-detection re-measurement: effect '(mostly) a statistical artefact'"
+    },
+    {
+      "source": "dk_gignac_zajenkowski_2020",
+      "target": "dk_krueger_mueller_2002",
+      "strength": 0.45,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "extends the 2002 regression critique with a validated new method"
+    },
+    {
+      "source": "dk_jansen_rafferty_griffiths_2021",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.55,
+      "confidence": 0.75,
+      "kind": "faithful",
+      "label": "rational model plus two large studies: low performers partly insensible to evidence"
+    },
+    {
+      "source": "dk_dunning_defense_2022",
+      "target": "dk_kruger_dunning_1999",
+      "strength": 0.6,
+      "confidence": 0.85,
+      "kind": "faithful",
+      "label": "origin author defends a weakened metacognitive reading against the artifact charge"
+    },
+    {
+      "source": "dk_dunning_defense_2022",
+      "target": "dk_krueger_mueller_2002",
+      "strength": 0.4,
+      "confidence": 0.8,
+      "kind": "faithful",
+      "label": "answers the 2002 reanalysis directly"
+    },
+    {
+      "source": "dk_dunning_defense_2022",
+      "target": "dk_gignac_zajenkowski_2020",
+      "strength": 0.4,
+      "confidence": 0.8,
+      "kind": "faithful",
+      "label": "responds to the 'mostly a statistical artefact' verdict"
+    }
+  ]
+}

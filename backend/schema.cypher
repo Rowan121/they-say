@@ -10,12 +10,19 @@
 //   (:__Document__ {__id__, path, document_type,           -- the ingested source PDF
 //                   file_identifier, file_size, createdAt})
 //   (Document and Claim also carry the internal :__Entity__ label)
+//   (:CaseStudy {case_id, title, icon, popular_claim, verdict,
+//                summary, accent, order})                   -- curated mutation
+//                                                             story (import_cases.py)
 //
 // Relationships
 //   (:Document)-[:CONTAINS_CLAIM]->(:Claim)
 //   (:__Chunk__)-[:__CHUNK_TO_DOCUMENT__]->(:__Document__)
 //   (:__Chunk__)-[:__NEXT_CHUNK__]->(:__Chunk__)
 //   (:Document|:Claim)-[:__NODE_TO_CHUNK__]->(:__Chunk__)
+//   (:CaseStudy)-[:HAS_DOCUMENT]->(:Document)               -- curated corpus
+//   (:Document)-[:CITES {strength, confidence, kind,
+//                        label}]->(:Document)                 -- curated citation with
+//                                                             faithfulness score
 
 CREATE CONSTRAINT document_id IF NOT EXISTS
   FOR (d:Document) REQUIRE d.__id__ IS UNIQUE;

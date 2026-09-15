@@ -1,0 +1,47 @@
+{
+  "hummingbird": {
+    "order": 1,
+    "icon": "🐦",
+    "title": "The Hummingbird 1:4 Sugar Rule",
+    "popular_claim": "“Always mix sugar water 1:4 (~20%) — it’s what the science says.”",
+    "verdict": "STRONG",
+    "summary": "A feeder rule every site repeats, traced to papers that never prescribed it — while the ~50% sucrose study sits alone, uncited.",
+    "accent": "#f472b6"
+  },
+  "protein": {
+    "order": 2,
+    "icon": "🥩",
+    "title": "The 40g Protein Ceiling",
+    "popular_claim": "“Your body can only absorb ~30–40g of protein per meal — more is wasted.”",
+    "verdict": "STRONG",
+    "summary": "A 20g MPS plateau in six young men became a universal digestive ceiling — a 2023 study titled ‘no upper limit’ went ignored.",
+    "accent": "#fb7185"
+  },
+  "dunningkruger": {
+    "order": 3,
+    "icon": "🧠",
+    "title": "Mount Stupid",
+    "popular_claim": "“Incompetent people can’t know they’re incompetent — the least skilled are the most overconfident.”",
+    "verdict": "STRONG",
+    "summary": "Four small studies and an internet-fabricated curve became ‘a law of psychology’ — random numbers reproduce the curve exactly.",
+    "accent": "#a78bfa"
+  },
+  "house": {
+    "order": 4,
+    "icon": "🏠",
+    "title": "The $4 Billion House",
+    "popular_claim": "“The most expensive house in the world costs $4 billion.”",
+    "verdict": "STRONG",
+    "summary": "A compounded projection and a non-saleable palace became a market ‘fact’ — no $4B transaction has ever existed.",
+    "accent": "#38bdf8"
+  },
+  "steps": {
+    "order": 5,
+    "icon": "👟",
+    "title": "The 10,000 Steps Commandment",
+    "popular_claim": "“You need 10,000 steps a day for your health.”",
+    "verdict": "STRONG",
+    "summary": "A 1965 pedometer brand’s product name became a clinical commandment — the benefit plateaus thousands of steps lower.",
+    "accent": "#34d399"
+  }
+}
