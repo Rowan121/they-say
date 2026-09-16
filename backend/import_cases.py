@@ -13,6 +13,7 @@ project root:
     export NEO4J_URI="neo4j+s://<instance>.databases.neo4j.io"
     export NEO4J_USER="neo4j"
     export NEO4J_PASSWORD="<your-password>"
+    export NEO4J_DATABASE="neo4j"          # Aura free-tier default = instance ID
     python3 backend/import_cases.py            # merge/update
     python3 backend/import_cases.py --clear    # drop case data first, then import
 
@@ -76,9 +77,10 @@ def main():
         all_nodes += case["nodes"]
         all_edges += case["edges"]
 
+    database = os.environ.get("NEO4J_DATABASE", "neo4j")
     driver = GraphDatabase.driver(uri, auth=(user, password))
     try:
-        with driver.session() as s:
+        with driver.session(database=database) as s:
             s.run(
                 "CREATE CONSTRAINT case_study_id IF NOT EXISTS "
                 "FOR (c:CaseStudy) REQUIRE c.case_id IS UNIQUE"
@@ -111,7 +113,8 @@ def main():
                 SET d.title = n.title, d.authors = n.authors, d.year = n.year,
                     d.type = n.type, d.layer = n.layer, d.url = n.url,
                     d.stance = n.stance, d.claim = n.claim, d.ratio = n.ratio,
-                    d.verified = n.verified, d.note = n.note, d.case_id = n.case_id
+                    d.verified = n.verified, d.note = n.note, d.case_id = n.case_id,
+                    d.filename = n.id
                 WITH d, n
                 MATCH (c:CaseStudy {case_id: n.case_id})
                 MERGE (c)-[:HAS_DOCUMENT]->(d)
