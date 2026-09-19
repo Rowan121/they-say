@@ -2,6 +2,45 @@
 
 **Live demo:** <https://rowan121.github.io/they-say/>
 
+## The proposed system — "GroundTruth" claim tracker
+
+The five cases below are curated by hand. The plan is to automate this: an
+open-source pipeline that ingests documents, extracts verifiable claims, and
+tracks how each claim mutates or gets refuted **over time**. Full proposal:
+[Proposed System Architecture for "GroundTruth" Claim Tracker](docs/Proposed%20System%20Architecture%20for%20“GroundTruth”%20Claim%20Tracker.pdf)
+· worked example on the hummingbird rule:
+[Tracing the Hummingbird "One-to-Four" Rule Back to the Science](docs/Tracing%20the%20Hummingbird%20“One-to-Four”%20Rule%20Back%20to%20the%20Science.pdf)
+
+How it works, in four stages:
+
+1. **Ingest & extract claims** — chunk the corpus (papers, blog posts, gov
+   pages), then an LLM (GPT-4o class, or an open model) splits each chunk into
+   verifiable claim triples (subject–predicate–object), each tagged with its
+   source document and publication date.
+2. **Store as a time-aware knowledge graph** — claims, authors, and
+   publications are nodes; `cites` / `supports` / `refutes` are edges. A graph
+   DB (Neo4j or ArangoDB) holds the graph; a vector store (Weaviate/Milvus)
+   indexes claim embeddings for semantic lookup. Hybrid search = vector
+   similarity to find candidate claims + graph traversal to walk the evidence
+   chain.
+3. **Track claims through time** — every claim carries `valid_from` (and
+   `valid_until` once superseded). An invalidation pass flags earlier claims
+   that newer evidence contradicts, so the system can answer questions like
+   *"which widely-cited claim was later refuted?"* and *"what was the
+   consensus in 2010 vs today?"* — the temporal question the current
+   prototype can't answer.
+4. **Update continuously** — new documents flow through the same pipeline
+   (chunk → extract → embed → index), so the graph stays current without
+   manual curation.
+
+Why build it: the current Neo4j GraphRAG prototype proved the concept, but the
+free tier caps document intelligence at 25 chunks per source — fine for a demo,
+not for a real corpus. This design is the reproducible, open-source path (the
+proposal also covers deployment: Python services, Airflow/Kafka orchestration,
+Docker).
+
+---
+
 Common knowledge has a citation trail — and sometimes it leads nowhere the
 source ever went. Each case here is a "fact" everyone repeats, traced back to
 what the original study actually found. Watch a real result mutate as it
@@ -31,7 +70,7 @@ counter-truth stands alone at the far right.
 frontend/           D3 force-graph visualization (index.html) + graph.json data
 backend/            Neo4j GraphRAG snapshot + case data + build/import scripts
 backend/data/cases/ One JSON file per curated case study (the source of truth)
-docs/               Screenshot
+docs/               Design PDFs (proposed system, hummingbird trace) + screenshot
 ```
 
 `frontend/graph.json` is a **build artifact**. It is merged from
