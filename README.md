@@ -10,7 +10,8 @@ tracks how each claim mutates or gets refuted **over time**. Full proposal:
 [Proposed System Architecture for "GroundTruth" Claim Tracker](docs/Proposed%20System%20Architecture%20for%20“GroundTruth”%20Claim%20Tracker.pdf)
 · worked example on the hummingbird rule:
 [Tracing the Hummingbird "One-to-Four" Rule Back to the Science](docs/Tracing%20the%20Hummingbird%20“One-to-Four”%20Rule%20Back%20to%20the%20Science.pdf)
-· pitch package (deck + reports + source, zip): [pitch/they-say-pitch.zip](pitch/they-say-pitch.zip)
+· pitch deck: [pitch/GroundTruth-Pitch-Deck.pptx](pitch/GroundTruth-Pitch-Deck.pptx)
+· full package (deck + reports + source, zip): [pitch/they-say-pitch.zip](pitch/they-say-pitch.zip)
 
 How it works, in four stages:
 
