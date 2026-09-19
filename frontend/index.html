@@ -106,8 +106,12 @@
   #detail .dmeta{font-size:11.5px;color:var(--ink-faint);margin-bottom:10px}
   #detail .dclaim{font-size:12.5px;line-height:1.5;color:var(--ink-dim);border-left:2px solid var(--panel-brd);padding-left:10px;margin:10px 0}
   #detail .dnote{font-size:11px;color:var(--ink-faint);font-style:italic;margin-bottom:12px}
-  #detail a{display:inline-block;font-size:11.5px;color:#7cc4ff;text-decoration:none;word-break:break-all}
-  #detail a:hover{text-decoration:underline}
+  #detail a.dlink{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:4px;
+    padding:9px 12px;border-radius:10px;font-size:12px;font-weight:600;letter-spacing:.3px;
+    background:rgba(124,196,255,.12);border:1px solid rgba(124,196,255,.35);color:#8ecbff;text-decoration:none;
+    transition:.15s;word-break:normal}
+  #detail a.dlink:hover{background:rgba(124,196,255,.22);border-color:rgba(124,196,255,.6);transform:translateY(-1px)}
+  #detail a.dlink .ext{font-size:11px;opacity:.75}
   #detail .drow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
   .foot{font-size:10px;color:var(--ink-faint);padding:10px 16px;border-top:1px solid var(--panel-brd)}
   .foot b{color:var(--ink-dim)}
@@ -186,7 +190,7 @@
       <div class="drow" id="d_row"></div>
       <div class="dclaim" id="d_claim"></div>
       <div class="dnote" id="d_note"></div>
-      <a id="d_link" target="_blank" rel="noopener"></a>
+      <a id="d_link" class="dlink" target="_blank" rel="noopener"></a>
     </div>
     <div id="edge-tip">
       <button class="et-close" onclick="hideEdgeTip()">✕</button>
@@ -434,7 +438,7 @@ function focusNode(d){
   node.classed('dim',n=>!set.has(n.id));
   link.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
   linkHalo.classed('dim',e=>!((e.source.id||e.source)===d.id||(e.target.id||e.target)===d.id));
-  d3.selectAll('.paper').classed('active',p=>p.__id===d.id);
+  d3.selectAll('.paper').classed('active',function(){return this.__id===d.id;});
 }
 function clearFocus(){focused=null;if(node){node.classed('focus',false).classed('dim',false);link.classed('dim',false);linkHalo.classed('dim',false);}d3.selectAll('.paper').classed('active',false);}
 
@@ -456,7 +460,9 @@ function showDetail(d){
   if(d.verified){const v=document.createElement('span');v.className='chip verif';v.textContent='VERIFIED SOURCE';row.appendChild(v);}
   document.getElementById('d_claim').textContent=d.claim;
   document.getElementById('d_note').textContent=d.note||'';
-  const a=document.getElementById('d_link');a.href=d.url;a.textContent=d.url;
+  const a=document.getElementById('d_link');a.href=d.url;
+  a.innerHTML='View source <span class="ext">↗</span>';
+  a.title=d.url;
   document.getElementById('detail').classList.add('show');
 }
 function hideDetail(){document.getElementById('detail').classList.remove('show');clearFocus();hideEdgeTip();}
